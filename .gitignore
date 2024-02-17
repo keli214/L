@@ -1,4 +1,8 @@
 /.DS_Store
 /Makefile
 /test**
+/.dSYM
 /.vscode
+/*.c
+/*.out
+/main

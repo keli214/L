@@ -4,9 +4,11 @@
 using namespace std;
 
 bool canCross(vector<int>& stones) {
-    //i: idx of the stone in the input, j = units of prev jump
-    //dp[i][j] = 1 if u can jump to i with k = j
-    //at each i, update the dp[j][k] where stones[j] is in the range of [stones[i] + k-1, stones[i] + k+1]
+    /*  
+        i: idx of the stone in the input, j = units of prev jump
+        dp[i][j] = 1 if u can jump to i with k = j
+        at each i, update the dp[j][k] where stones[j] is in the range of [stones[i] + k-1, stones[i] + k+1]
+    */
     int n = stones.size(), maxK = stones.size();
     vector<vector<int>> dp(n, vector<int>(maxK, 0));
     //base case

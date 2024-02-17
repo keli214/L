@@ -2,13 +2,14 @@
 using namespace std;
 
 int divide(int dividend, int divisor) {
-    // count the number of times that divisor can shift left 
-    // until resulting in zero when substracted from divident
-    // ex: 10/3 = 3
-    // 3 << 1 = 6, 6 << 1 = 12 
-    // m = 2
-    // 10 - 6 = 4
-    // 4 >= 3
+    /* count the number of times that divisor can shift left 
+        until resulting in zero when substracted from divident
+      ex: 10/3 = 3
+        3 << 1 = 6, 6 << 1 = 12 
+        m = 2
+        10 - 6 = 4
+        4 >= 3
+    */
 
 
     // get the sign of the result
