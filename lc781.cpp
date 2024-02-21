@@ -14,23 +14,24 @@ int numRabbits(vector<int>& answers) {
         // else
         //  group = count / (answer+1);
         //  res += group * ( answer[i] + 1)
+        int maxPossibleRabbit = answers[i] + 1;
         if(i < n-1 && answers[i] == answers[i+1]){
             int j = i, count = 0;
             while(j < n && answers[j]== answers[i]){
                 count ++;
                 j++;
             }
-            if(answers[i] + 1 > count) 
-                res += answers[i] + 1;
+            if(maxPossibleRabbit > count) 
+                res += maxPossibleRabbit;
             else{
-                int group =  count/(answers[i] + 1);
-                group += count%(answers[i] + 1) ? 1 : 0;
-                res += group * (answers[i] + 1);
+                int group =  count/(maxPossibleRabbit);
+                group += count%(maxPossibleRabbit) ? 1 : 0;
+                res += group * (maxPossibleRabbit);
             }
             i = j;
         }
         else {
-            res += answers[i] + 1;
+            res += maxPossibleRabbit;
             i++;
         }
     }
