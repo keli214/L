@@ -22,13 +22,45 @@ private:
             return;
         }
         inorder(root->left);
+        checkInPlace(root);
+        inorder(root->right);
+    }
+
+    void checkInPlace(TreeNode* root){
         //check the node if it's in place
         if(!first && prev && prev->val > root->val)
             first = prev;
-        if(prev->val && prev->val > root->val)  
+        if(prev && prev->val > root->val)  
             second = root;    
         prev = root;
-        inorder(root->right);
+    }
+
+    void morris(TreeNode* root){
+        if(!root)
+            return;
+        TreeNode* curr = root;
+        while(curr){
+            if(!curr->left){
+                checkInPlace(curr);
+                curr = curr->right;
+            }
+            else{
+                TreeNode* prev = curr;
+                curr = curr->left;
+                while(curr->right && curr->right != prev){
+                    curr = curr->right;
+                }
+                if(!curr->right){
+                    curr->right = prev;
+                    curr = prev->left;
+                }
+                else{
+                    curr->right = nullptr;
+                    checkInPlace(prev);
+                    curr = prev->right;
+                }
+            }
+        }
     }
 public:
     /* Using inorder traversal to find the two elements that are out of order
@@ -38,7 +70,7 @@ public:
     So the first node will be the prev node at the first time we encounter 
     a node < prev, and the second node will be the node < prev at the second time.  */
     void recoverTree(TreeNode* root) {
-        inorder(root);
+        morris(root);
         int temp = first->val;
         first->val = second->val;
         second->val = temp;
