@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-int subarraySum(vector<int> nums, int target) {
+int maxSubArrayLen(vector<int> nums, int target) {
     unordered_map<int, int> m {{0,-1}}; //key: sum, val: idx
     int curr = 0, res = 0;
     for(int i = 0; i < nums.size(); i ++){
@@ -20,5 +20,5 @@ int subarraySum(vector<int> nums, int target) {
 }
 int main(){
     vector<int> nums {1,2,1,2,1};
-    cout<< subarraySum(nums, 3);
+    cout<< maxSubArrayLen(nums, 3);
 }
