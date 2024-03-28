@@ -40,11 +40,14 @@ class LRUCache{
         if(m.find(key) != m.end()){
             auto pairPtr = m[key];
             pairPtr->second = value;
+            //insert the key to the begining of the list
             cache.splice(cache.begin(), cache, pairPtr);
         }
         else{
+            //put the key in the begin
             cache.emplace_front(key,value);
             m[key] = cache.begin();
+            //remove the least recently used key
             if(cache.size() > capacity){
                 auto pairPtr = cache.back();
                 m.erase(pairPtr.first);
