@@ -13,37 +13,24 @@ using namespace std;
     
     sort the array
     using dp table to store the max num if taken the current 
-    element
+    element or skip the current element
     
 */
 int deleteAndEarn(vector<int>& nums) {
     sort(nums.begin(), nums.end());
-
-    int n = nums.size();
-    vector<int> dp(n+1, 0); 
+    int n = 10001;
+    vector<int> dp(n, 0); 
+    for(auto i : nums){
+        dp[i] += i;
+    }
+    int take = 0, skip = 0;
     for(int i = 0; i < n; i ++){
-        if(i == 0 || nums[i-1] == nums[i]){
-            dp[i+1] = dp[i] + nums[i];
-        }
-        else{
-            int j = i-1;
-            if(nums[j] + 1 == nums[i]){
-                while(j >= 0 && nums[j] + 1 == nums[i]){
-                    j--;
-                }
-            }
-            int m = dp[j+1];
-            for(int k = 0; k <= j; k++){
-                m = max(m, dp[k]);
-            }
-            dp[i+1] = m + nums[i];
-        }
+        int takeCurr = skip + dp[i];
+        int skipCurr = max(skip, take);
+        take = takeCurr; 
+        skip = skipCurr;
     }
-    int res = dp[n];
-    for(auto i: dp){
-        res = max(res, i);
-    }
-    return res;
+    return max(take, skip);
 }
 
 int main(){
