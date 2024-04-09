@@ -2,6 +2,7 @@
 #include <iostream>
 
 using namespace std;
+
 vector<vector<pair<int, int>>> dp;
 
 int helper(vector<int>& piles, int id, int l, int h){
